@@ -1,0 +1,8 @@
+# Compilation outputs
+*.o
+*.d
+*.a
+*.elf
+*.map
+*.hex
+*.eep
