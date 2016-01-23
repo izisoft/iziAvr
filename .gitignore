@@ -1,8 +1,16 @@
+# eclipse configuration
+.project
+.cproject
+/.settings/
+
 # Compilation outputs
 *.o
 *.d
 *.a
 *.elf
+*.lss
 *.map
 *.hex
 *.eep
+/debug/
+/release/

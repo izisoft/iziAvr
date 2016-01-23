@@ -1,6 +1,5 @@
 #include <core/iziKernel.h>
 #include <device/iziDevicePriv.h>
-#include <boost/preprocessor/tuple/size.hpp>
 
 #include <utils/iziPreprocessor.h>
 

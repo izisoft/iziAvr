@@ -1,6 +1,5 @@
 #ifndef IZIPREPROCESSOR_H_
 #define IZIPREPROCESSOR_H_
-#include <boost/preprocessor/tuple/pop_back.hpp>
 
 #define _IZI_PP_TUPLE_SIZE_I(e0,e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,e13,e14,e15,size, ...) size
 #define IZI_PP_TUPLE_SIZE(...) _IZI_PP_TUPLE_SIZE_I(__VA_ARGS__, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1,)
