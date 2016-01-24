@@ -34,7 +34,7 @@ extern "C" {
 #endif
 
 #ifndef IZI_SYSTEM_TICK_RATE
-	#define IZI_SYSTEM_TICK_RATE 100
+	#define IZI_SYSTEM_TICK_RATE 256
 #endif
 
 //=================================================================================================

@@ -33,8 +33,19 @@
 #define IZI_PP_UCAT4(a,b,c,d) IZI_PP_UCAT(IZI_PP_UCAT3(a,b,c),d)
 #define IZI_PP_UCAT5(a,b,c,d,e) IZI_PP_UCAT(IZI_PP_UCAT4(a,b,c,d),e)
 
-#define _IZI_PP_CONSUME(x) x
-#define IZI_PP_CONSUME(x) _IZI_PP_CONSUME x
+#define _IZI_PP_CONSUME_0 0
+#define _IZI_PP_CONSUME_1 1
+#define _IZI_PP_CONSUME_2 2
+#define _IZI_PP_CONSUME_3 3
+#define _IZI_PP_CONSUME_4 4
+#define _IZI_PP_CONSUME_5 5
+#define _IZI_PP_CONSUME_6 6
+#define _IZI_PP_CONSUME_7 7
+#define _IZI_PP_CONSUME_8 8
+#define _IZI_PP_CONSUME_9 9
+#define _IZI_PP_CONSUME_(x) x
+#define _IZI_PP_CONSUME(x) _IZI_PP_CONSUME_ ## x
+#define IZI_PP_CONSUME(x) _IZI_PP_CONSUME(x)
 
 #define _IZI_ISR_ID__vector_0     0
 #define _IZI_ISR_ID__vector_1     1
