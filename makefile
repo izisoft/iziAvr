@@ -1,4 +1,12 @@
+ifeq ($(OS),Windows_NT)
+RM := del /F/Q
+PATH_SEP := "\"
+MD := mkdir
+else
 RM := rm -rf
+PATH_SEP := /
+MD := mkdir -p
+endif
 
 LSS += libiziAvr.lss
 
@@ -16,19 +24,24 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 
 SOURCES += $(call rwildcard, src/, *.c)
 
-DEPS += \ $(patsubst %.c,%.d, $(SOURCES))
+DEPS += $(patsubst %.c,build/%.d, $(SOURCES))
 
-OBJS += $(patsubst %.c,%.o, $(SOURCES))
+OBJS += $(patsubst %.c,build/%.o, $(SOURCES))
 
-%.o: %.c
+OUT_DIRS = $(sort $(foreach obj, $(OBJS), $(dir $(obj))))
+	
+build/%.o: %.c
 	@echo 'Building file: $<'
-	@echo 'Invoking: AVR Compiler'
+	@echo 'Invoking: AVR Compiler;
 	avr-gcc $(INCLUDES) -Wall -Werror -Os -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -g -mmcu=atmega32 -DF_CPU=7372800UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
+	
+build/%:
+	$(if $(wildcard $@), , $(MD) $(subst /,$(PATH_SEP),$@))
 
 # All Target
-all: libiziAvr.a secondary-outputs
+all: $(OUT_DIRS) libiziAvr.a secondary-outputs
 
 # Tool invocations
 libiziAvr.a: $(OBJS)
@@ -46,10 +59,10 @@ libiziAvr.lss: libiziAvr.a
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(ARCHIVES)$(ASM_DEPS)$(S_DEPS)$(S_UPPER_DEPS)$(LSS)$(C_DEPS)$(CPP_DEPS) libiziAvr.a
+	-$(RM) $(subst /,$(PATH_SEP),$(OBJS)) $(subst /,$(PATH_SEP),$(DEPS)) $(LSS) libiziAvr.a
 	-@echo ' '
 
 secondary-outputs: $(LSS)
-
-.PHONY: all clean dependents
+	
+.PHONY: all clean dependents directories
 .SECONDARY:
