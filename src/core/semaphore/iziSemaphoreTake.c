@@ -7,16 +7,7 @@ IziBool_t iziSemaphoreTake(TIziSemaphore* semaphore,IziDelay_t waitTicks)
 {
 	IZI_ATOMIC_BLOCK()
 	{
-		if(semaphore->_value != 0)
-		{
-			semaphore->_value--;
-			return IziTrue;
-		}
-		else if(waitTicks == 0)
-		{
-			return IziFalse;
-		}
-		else
+		if((semaphore->_value == 0) && (waitTicks > 0))
 		{
 			iziTaskSuspend(waitTicks);
 			iziTaskEventListAdd((TIziTaskList *)(&(semaphore->_subscribers)),(TIziTask*)gIziCurrentTask);

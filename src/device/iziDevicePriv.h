@@ -19,8 +19,6 @@ extern "C" {
 extern void iziDeviceInitSystemClock();
 extern void iziDeviceInitTaskStack(TIziTask *task, void (*taskFunction)(void));
 
-#ifndef IZI_AVR_UNIT_TEST
-
 #if defined(atmega8)
 
 #define IZI_DEVIE_SYMBOL M8
@@ -79,8 +77,8 @@ asm volatile ( "push  r0                                \n\t"  \
                "push  r29                               \n\t"  \
                "push  r30                               \n\t"  \
                "push  r31                               \n\t"  \
-               "lds   r26, gIziCurrentTask                   \n\t"  \
-               "lds   r27, gIziCurrentTask + 1               \n\t"  \
+               "lds   r26, gIziCurrentTask              \n\t"  \
+               "lds   r27, gIziCurrentTask + 1          \n\t"  \
                "in    r0, __SP_L__                      \n\t"  \
                "st    x+, r0                            \n\t"  \
                "in    r0, __SP_H__                      \n\t"  \
@@ -88,8 +86,8 @@ asm volatile ( "push  r0                                \n\t"  \
               )
 
 #define IZI_RESTORE_CONTEXT()                                  \
-asm volatile ( "lds   r26, gIziCurrentTask                   \n\t"  \
-               "lds   r27, gIziCurrentTask + 1               \n\t"  \
+asm volatile ( "lds   r26, gIziCurrentTask              \n\t"  \
+               "lds   r27, gIziCurrentTask + 1          \n\t"  \
                "ld    r28, x+                           \n\t"  \
                "out   __SP_L__, r28                     \n\t"  \
                "ld    r29, x+                           \n\t"  \
@@ -189,18 +187,6 @@ asm volatile ( "lds   r26, gIziCurrentTask                   \n\t"  \
 #define IZI_EE_USER_START              (IZI_DEVICE_EEPROM_SIZE - IZI_EE_USER_RESERVED)
 
 #define IZI_ASYNC_CLOCK_SPEED (32768)
-
-#else
-
-#define IZI_DEVICE_EEPROM_SIZE            (1024)
-#define IZI_DEVICE_RAM_SIZE               (2048)
-#define IZI_DEVICE_FLASH_SIZE             (32768)
-
-#define IZI_CONST(type,name)            type name
-#define IZI_CONST_READ_BYTE(addr)       1
-#define ISR(_vector_)                   void interrupt_##_vector_( void )
-
-#endif
 
 #ifdef __cplusplus
 }

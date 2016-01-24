@@ -2,5 +2,5 @@
 
 IziBool_t iziKernelCheckState(EIziStateFlag flag)
 {
-	return ((gIziState & _BV(flag)) != 0);
+	return IZI_GET_STATE(flag);
 }

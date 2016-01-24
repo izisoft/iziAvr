@@ -5,20 +5,9 @@
 
 IziBool_t iziMutexTake(TIziMutex* mutex, IziDelay_t waitTicks)
 {
-	IZI_LOOP_CRITICAL()
+	IZI_ATOMIC_BLOCK()
 	{
-		if(mutex->_value == 1)
-		{
-			mutex->_value = 0;
-			mutex->_ownerPriority = gIziCurrentTask->_priority;
-			mutex->_owner = (TIziTask*)gIziCurrentTask;
-			IZI_RETURN_CRITICAL(IziTrue);
-		}
-		else if (waitTicks == 0)
-		{
-			IZI_RETURN_CRITICAL(IziFalse);
-		}
-		else
+		if((mutex->_value == 0) && (waitTicks > 0))
 		{
 			iziTaskSuspend(waitTicks);
 			iziTaskEventListAdd((TIziTaskList*)(&(mutex->_subscribers)), (TIziTask*)gIziCurrentTask);
@@ -29,9 +18,12 @@ IziBool_t iziMutexTake(TIziMutex* mutex, IziDelay_t waitTicks)
 			iziKernelYeld();
 		}
 
-		if(mutex->_value == 0)
+		if(mutex->_value == 1)
 		{
-			IZI_RETURN_CRITICAL(IziFalse);
+			mutex->_value = 0;
+			mutex->_ownerPriority = gIziCurrentTask->_priority;
+			mutex->_owner = (TIziTask*)gIziCurrentTask;
+			return IziTrue;
 		}
 	}
 	return IziFalse;

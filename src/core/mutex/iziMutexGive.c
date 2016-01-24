@@ -15,13 +15,11 @@ IziBool_t iziMutexGive(TIziMutex* mutex)
 			mutex->_value = 1;
 			gIziCurrentTask->_priority = mutex->_ownerPriority;
 			// TODO moving current task to the end of list of original priority
-			if(mutex->_subscribers._iter != NULL)
+			if((mutex->_subscribers._iter != NULL) &&
+					(iziTaskWakeUpWithEvent((TIziTaskList *)(&(mutex->_subscribers)))
+							>= mutex->_ownerPriority))
 			{
-				if(iziTaskWakeUpWithEvent((TIziTaskList *)(&(mutex->_subscribers)))
-						>= mutex->_ownerPriority)
-				{
-					iziKernelYeld();
-				}
+				iziKernelYeld();
 			}
 			retVal = IziTrue;
 		}

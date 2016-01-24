@@ -2,8 +2,6 @@
 #include <device/iziDevicePriv.h>
 #include "iziTaskPriv.h"
 
-
-
 void iziTaskDelaySec(IziDelay_t waitSeconds)
 {
 	IZI_ATOMIC_BLOCK()

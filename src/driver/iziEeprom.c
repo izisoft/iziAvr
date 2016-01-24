@@ -13,7 +13,6 @@ TIziMutex	iziEepromMutex;
 #define ENABLE_EEPROM_INT()		EECR |= _BV(EERIE)
 #define DISABLE_EEPROM_INT()	EECR &= ~_BV(EERIE)
 
-#ifndef IZI_AVR_UNIT_TEST
 #define ENABLE_EEPROM_WRITE()									\
 	asm volatile (	"sbi	%[__eecr], %[__eemwe]	\n\t"		\
 					"sbi	%[__eecr], %[__eewe]	\n\t"		\
@@ -31,15 +30,12 @@ TIziMutex	iziEepromMutex;
 					[__eecr] "i" (_SFR_IO_ADDR(EECR)),			\
 					[__eere] "i" (EERE)							\
 	)
-#else
-#define ENABLE_EEPROM_WRITE()
-#define ENABLE_EEPROM_READ()
-#endif
 
 //=====================================================================
 void iziEepromInit( void )
 {
-	if(!iziKernelCheckState(eIziEepromInit)) {
+	if(!iziKernelCheckState(eIziEepromInit))
+	{
 		iziSemaphoreCreate(&iziEepromSemph,IziFalse);
 		iziMutexCreate(&iziEepromMutex);
 		iziKernelSetState(eIziEepromInit);
@@ -49,10 +45,12 @@ void iziEepromInit( void )
 //=====================================================================
 uint8_t iziEepromWriteNative(IziEepromAddr_t position, const char *data, uint8_t dataCount)
 {
-	if(iziMutexTake(&iziEepromMutex,IZI_MAX_DELAY) == IziTrue) {
+	if(iziMutexTake(&iziEepromMutex,IZI_MAX_DELAY) == IziTrue)
+	{
 		ENABLE_EEPROM_INT();
 		iziSemaphoreTake(&iziEepromSemph,IZI_MAX_DELAY);
-		while(dataCount--) {
+		while(dataCount--)
+		{
 			EEAR = position++;
 			EEDR = *(data++);
 			IZI_ATOMIC_INSTRUCTION(ENABLE_EEPROM_WRITE());
@@ -109,7 +107,8 @@ ISR(EE_RDY_vect)
 	iziSemaphoreGiveFromIsr(&iziEepromSemph,&needYeld);
 	DISABLE_EEPROM_INT();
 
-	if(needYeld == IziTrue) {
+	if(needYeld == IziTrue)
+	{
 		iziKernelYeld();
 	}
 }

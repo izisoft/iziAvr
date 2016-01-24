@@ -1,9 +1,7 @@
 #include <core/kernel/iziKernelPriv.h>
 #include "iziTaskPriv.h"
 
-
-
-void* iziTaskGetParams( TIziTask *task )
+void* iziTaskGetParams(TIziTask* task)
 {
 	if(task != NULL)
 	{
