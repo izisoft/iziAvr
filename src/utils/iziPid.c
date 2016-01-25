@@ -2,13 +2,10 @@
 #define DBGU_SGN 	"PID"
 #define DBGU_FLAG	FEAT_DBG_PID
 
-//#includes
-// iziAVR includes
-#include <izi/avr/utils/pid.h>
 #include <izi/avr/core/memory.h>
 #include <izi/avr/core/kernel.h>
+#include <izi/avr/utils/pid.h>
 
-//#defines
 #define IZI_PID_STACK_SIZE	96
 
 #define IZI_LIMIT(VAL,LOW,HIGH)      \
@@ -20,7 +17,6 @@
 	}                                \
 }
 
-//#function iziPidCreate
 void iziPidTask()
 {
 	TIziPidController *me = (TIziPidController*)(iziKernelCurrentTask()->_params);
@@ -68,7 +64,6 @@ TIziPidController *iziPidCreate(uint16_t (*getValue)(), void (*setOutput)(uint16
 	return pidController;
 }
 
-//#function iziPidSetPoint
 void iziPidSetPoint(uint16_t setPoint,TIziPidController *pid)
 {
 

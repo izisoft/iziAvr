@@ -6,6 +6,7 @@
 #include <izi/avr/core/mutex.h>
 #include <izi/avr/core/semaphore.h>
 #include <izi/avr/driver/twi.h>
+
 #include <device/iziDevicePriv.h>
 
 // Master

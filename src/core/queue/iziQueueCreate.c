@@ -1,7 +1,6 @@
-#include <izi/avr/types.h>
-
 #include <izi/avr/core/queue.h>
 #include <izi/avr/core/memory.h>
+#include <izi/avr/types.h>
 
 IziBool_t iziQueueCreate(TIziQueue* queue, uint8_t itemCount, uint8_t itemSize)
 {

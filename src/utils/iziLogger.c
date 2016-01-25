@@ -4,8 +4,8 @@
 
 #include <izi/avr/core/kernel.h>
 #include <izi/avr/core/memory.h>
-#include <izi/avr/utils/logger.h>
 #include <izi/avr/driver/uart.h>
+#include <izi/avr/utils/logger.h>
 
 void iziLoggerInit(uint32_t baudrate)
 {

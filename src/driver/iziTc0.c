@@ -1,8 +1,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <device/iziDevicePriv.h>
 #include <izi/avr/driver/tc0.h>
+
+#include <device/iziDevicePriv.h>
 
 void iziTc0Init(ETc0ClockSource cs, ETc0WaveGenerationMode wgm, ETc0OutCmpMode ocm)
 {

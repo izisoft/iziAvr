@@ -4,8 +4,7 @@
 #include <core/task/iziTaskPriv.h>
 #include <device/iziDevicePriv.h>
 
-#include <core/queue/iziQueuePriv.h>
-
+#include "iziQueuePriv.h"
 
 uint8_t iziQueueGetFromTask(TIziQueue* queue, void* item, IziDelay_t waitTicks)
 {

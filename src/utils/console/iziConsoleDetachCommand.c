@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include <izi/avr/utils/console.h>
 #include <izi/avr/core/memory.h>
+#include <izi/avr/utils/console.h>
 
 #include "iziConsoleCommon.h"
 

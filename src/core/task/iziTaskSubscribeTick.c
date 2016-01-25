@@ -1,6 +1,5 @@
-#include <izi/avr/types.h>
-
 #include <core/kernel/iziKernelPriv.h>
+
 #include "iziTaskPriv.h"
 
 void iziTaskSubscribeTick(IziTick_t tick)

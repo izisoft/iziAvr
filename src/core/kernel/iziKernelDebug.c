@@ -1,5 +1,5 @@
-#include "iziKernelPriv.h"
 #include <core/task/iziTaskPriv.h>
+#include <device/iziDevicePriv.h>
 
 #ifdef IZI_KERNEL_DEBUG
 

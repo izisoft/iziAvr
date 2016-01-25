@@ -1,8 +1,8 @@
-#include <device/iziDevicePriv.h>
 #include <izi/avr/core/mutex.h>
 
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
+#include <device/iziDevicePriv.h>
 
 IziBool_t iziMutexGive(TIziMutex* mutex)
 {

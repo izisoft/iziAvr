@@ -1,5 +1,6 @@
-#include <device/iziDevicePriv.h>
 #include <izi/avr/driver/port.h>
+
+#include <device/iziDevicePriv.h>
 
 #define IZI_DDR_OFFSET (-0x01)
 #define IZI_PIN_OFFSET (-0x02)

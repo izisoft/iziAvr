@@ -1,8 +1,8 @@
+#include <izi/avr/core/semaphore.h>
+
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
 #include <device/iziDevicePriv.h>
-
-#include <izi/avr/core/semaphore.h>
 
 IziBool_t iziSemaphoreGive(TIziSemaphore* semaphore)
 {

@@ -1,7 +1,8 @@
-#include <device/iziDevicePriv.h>
 #include <izi/avr/core/mutex.h>
+
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
+#include <device/iziDevicePriv.h>
 
 IziBool_t iziMutexTake(TIziMutex* mutex, IziDelay_t waitTicks)
 {

@@ -1,6 +1,7 @@
 #include <izi/avr/config.h>
 #include <izi/avr/core/task.h>
 #include <izi/avr/utils/preprocessor.h>
+
 #include "iziDevicePriv.h"
 
 #if IZI_SYSTEM_TICK_SOURCE == IZI_SYSTEM_TICK_TC0

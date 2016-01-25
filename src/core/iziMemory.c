@@ -1,9 +1,10 @@
 #include <string.h>
 
 #include <util/atomic.h>
+
 #include <izi/avr/core/memory.h>
+
 #include <core/kernel/iziKernelPriv.h>
-#include <device/iziDevicePriv.h>
 
 #define IZI_MALLOC_PATTERN		0xAE
 #define IZI_FREE_PATTERN		0xBD

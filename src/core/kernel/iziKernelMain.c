@@ -1,7 +1,7 @@
 #include <izi/avr/core/kernel.h>
-#include <device/iziDevicePriv.h>
-
 #include <izi/avr/utils/preprocessor.h>
+
+#include <device/iziDevicePriv.h>
 
 extern int iziMain();
 

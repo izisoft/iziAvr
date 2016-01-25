@@ -1,6 +1,6 @@
-#include <device/iziDevicePriv.h>
-
 #include <izi/avr/driver/pin.h>
+
+#include <device/iziDevicePriv.h>
 
 #define IZI_PORT_ID(pin) ((pin) & 0xFF00)
 #define IZI_DDR_ID(pin) IZI_PORT_ID(pin - 0x0100)

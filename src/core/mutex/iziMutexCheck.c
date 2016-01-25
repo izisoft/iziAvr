@@ -1,5 +1,5 @@
-#include <device/iziDevicePriv.h>
 #include <izi/avr/core/mutex.h>
+#include <device/iziDevicePriv.h>
 
 IziBool_t iziMutexCheck(TIziMutex* mutex)
 {

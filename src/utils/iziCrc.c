@@ -1,5 +1,6 @@
-#include <izi/avr/utils/crc.h>
 #include <util/crc16.h>
+
+#include <izi/avr/utils/crc.h>
 
 IziCrc_t iziCrcCalculate(const char* data, size_t dataSize)
 {
@@ -52,6 +53,7 @@ uint8_t iziCrc8(uint8_t crc,uint8_t data)
 
 uint16_t iziCrc16(uint16_t* crc, uint8_t data) 
 {
+	// FIXME
 	return 0;
 }
 

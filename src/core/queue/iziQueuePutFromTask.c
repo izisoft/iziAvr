@@ -1,9 +1,10 @@
 #include <string.h>
 
-#include <device/iziDevicePriv.h>
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
-#include <core/queue/iziQueuePriv.h>
+#include <device/iziDevicePriv.h>
+
+#include "iziQueuePriv.h"
 
 uint8_t iziQueuePutFromTask(TIziQueue* queue,const void* item, IziDelay_t waitTicks)
 {

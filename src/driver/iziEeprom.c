@@ -5,6 +5,7 @@
 #include <izi/avr/core/mutex.h>
 #include <izi/avr/core/kernel.h>
 #include <izi/avr/driver/eeprom.h>
+
 #include <device/iziDevicePriv.h>
 
 TIziSemaphore iziEepromSemph;

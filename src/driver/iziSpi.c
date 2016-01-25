@@ -8,6 +8,7 @@
 #include <izi/avr/core/mutex.h>
 #include <izi/avr/core/semaphore.h>
 #include <izi/avr/core/kernel.h>
+
 #include <device/iziDevicePriv.h>
 
 #define SS_PIN					eIziPinB4

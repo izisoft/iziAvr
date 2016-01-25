@@ -1,9 +1,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <device/iziDevicePriv.h>
 #include <izi/avr/driver/tc2.h>
-#include <izi/avr/utils/preprocessor.h>
+
+#include <device/iziDevicePriv.h>
 
 #define IZI_TC2_ASYNC_MODE() (ASSR & _BV(AS2))
 
