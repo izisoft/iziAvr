@@ -1,7 +1,7 @@
 #include <device/iziDevicePriv.h>
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
-#include <core/iziSemaphore.h>
+#include <izi/avr/core/semaphore.h>
 
 IziBool_t iziSemaphoreTake(TIziSemaphore* semaphore,IziDelay_t waitTicks)
 {

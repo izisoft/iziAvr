@@ -1,14 +1,14 @@
-#include <iziConf.h>
-#include <core/iziTask.h>
-#include <utils/iziPreprocessor.h>
+#include <izi/avr/config.h>
+#include <izi/avr/core/task.h>
+#include <izi/avr/utils/preprocessor.h>
 #include "iziDevicePriv.h"
 
 #if IZI_SYSTEM_TICK_SOURCE == IZI_SYSTEM_TICK_TC0
-#include <driver/iziTc0.h>
+#include <izi/avr/driver/tc0.h>
 #elif (IZI_SYSTEM_TICK_SOURCE == IZI_SYSTEM_TICK_TC1A) || (IZI_SYSTEM_TICK_SOURCE == IZI_SYSTEM_TICK_TC1B)
-#include <driver/iziTc1.h>
+#include <izi/avr/driver/tc1.h>
 #elif (IZI_SYSTEM_TICK_SOURCE == IZI_SYSTEM_TICK_TC2) || (IZI_SYSTEM_TICK_SOURCE == IZI_SYSTEM_TICK_TC2_ASYNC)
-#include <driver/iziTc2.h>
+#include <izi/avr/driver/tc2.h>
 #endif
 
 

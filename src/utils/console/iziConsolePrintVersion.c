@@ -1,4 +1,4 @@
-#include <utils/iziConsole.h>
+#include <izi/avr/utils/console.h>
 //#include <iziKernel.h>
 
 //#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY

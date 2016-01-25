@@ -1,9 +1,9 @@
-#ifndef IZIKERNELPRIV_H_
-#define IZIKERNELPRIV_H_
+#ifndef IZI_KERNELPRIV_H_
+#define IZI_KERNELPRIV_H_
 
-#include <iziConf.h>
-#include <core/iziTask.h>
-#include <core/iziKernel.h>
+#include <izi/avr/config.h>
+#include <izi/avr/core/task.h>
+#include <izi/avr/core/kernel.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,4 +42,4 @@ extern volatile uint16_t gIziState;
 }
 #endif
 
-#endif /* IZIKERNELPRIV_H_ */
+#endif /* IZI_KERNELPRIV_H_ */

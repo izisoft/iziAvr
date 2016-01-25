@@ -1,4 +1,4 @@
-#include <utils/iziConsole.h>
+#include <izi/avr/utils/console.h>
 #include <device/iziDevicePriv.h>
 
 #include "iziConsoleCommon.h"

@@ -3,11 +3,11 @@
 #include <avr/interrupt.h>
 #include <stdio.h>
 
-#include <iziConf.h>
-#include <driver/iziUart.h>
+#include <izi/avr/config.h>
+#include <izi/avr/driver/uart.h>
 #include <device/iziDevicePriv.h>
-#include <core/iziKernel.h>
-#include <core/iziQueue.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/queue.h>
 
 #define ENABLE_UART_TXINT()				UCSRB |= _BV(UDRIE)
 #define DISABLE_UART_TXINT()			UCSRB &= ~_BV(UDRIE)

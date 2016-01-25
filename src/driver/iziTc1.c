@@ -2,7 +2,7 @@
 #include <avr/interrupt.h>
 
 #include <device/iziDevicePriv.h>
-#include <driver/iziTc1.h>
+#include <izi/avr/driver/tc1.h>
 
 void iziTc1Init(ETc1ClockSource cs, ETc1WaveGenerationMode wgm,
 		ETc1OutCmpMode ocmA, ETc1OutCmpMode ocmB)

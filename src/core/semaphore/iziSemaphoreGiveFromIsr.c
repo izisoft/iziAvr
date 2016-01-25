@@ -1,6 +1,6 @@
-#include <iziAvr.h>
+#include <izi/avr/types.h>
 
-#include <core/iziSemaphore.h>
+#include <izi/avr/core/semaphore.h>
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
 

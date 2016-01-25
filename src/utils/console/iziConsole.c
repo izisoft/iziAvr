@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <utils/iziConsole.h>
-#include <driver/iziUart.h>
+#include <izi/avr/utils/console.h>
+#include <izi/avr/driver/uart.h>
 #include <device/iziDevicePriv.h>
-#include <core/iziKernel.h>
-#include <core/iziMemory.h>
-#include <core/iziTask.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/memory.h>
+#include <izi/avr/core/task.h>
 
 #include "iziConsoleCommon.h"
 

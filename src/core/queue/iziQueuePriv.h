@@ -1,9 +1,9 @@
-#ifndef IZIQUEUEPRIV_H_
-#define IZIQUEUEPRIV_H_
+#ifndef IZI_QUEUEPRIV_H_
+#define IZI_QUEUEPRIV_H_
 
 #include <string.h>
 
-#include <core/iziQueue.h>
+#include <izi/avr/core/queue.h>
 
 static inline void iziQueueGetItem(TIziQueue* queue, void* item)
 {
@@ -27,4 +27,4 @@ static inline void iziQueuePutItem(TIziQueue* queue, const void* item)
 	queue->_itemCount++;
 }
 
-#endif /* IZIQUEUEPRIV_H_ */
+#endif /* IZI_QUEUEPRIV_H_ */

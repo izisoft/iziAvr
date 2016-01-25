@@ -4,9 +4,9 @@
 
 //#includes
 // iziAVR includes
-#include <utils/iziPid.h>
-#include <core/iziMemory.h>
-#include <core/iziKernel.h>
+#include <izi/avr/utils/pid.h>
+#include <izi/avr/core/memory.h>
+#include <izi/avr/core/kernel.h>
 
 //#defines
 #define IZI_PID_STACK_SIZE	96

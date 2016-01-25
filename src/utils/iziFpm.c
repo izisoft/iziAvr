@@ -2,7 +2,7 @@
 #define DBGU_FLAG	FEAT_DBG_FPM
 
 //#includes
-#include <utils/iziFpm.h>
+#include <izi/avr/utils/fpm.h>
 
 //#defines
 #define IZI_FPM_BITS	16

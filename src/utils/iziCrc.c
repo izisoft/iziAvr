@@ -1,4 +1,4 @@
-#include <utils/iziCrc.h>
+#include <izi/avr/utils/crc.h>
 #include <util/crc16.h>
 
 IziCrc_t iziCrcCalculate(const char* data, size_t dataSize)

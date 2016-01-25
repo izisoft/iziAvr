@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include <utils/iziConsole.h>
+#include <izi/avr/utils/console.h>
 
 int iziConsoleGetArgumentAsInt(uint8_t argNum)
 {

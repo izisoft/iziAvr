@@ -1,5 +1,5 @@
 #include <device/iziDevicePriv.h>
-#include <core/iziMutex.h>
+#include <izi/avr/core/mutex.h>
 
 #include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>

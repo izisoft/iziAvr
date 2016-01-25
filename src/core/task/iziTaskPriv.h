@@ -1,7 +1,7 @@
-#ifndef TIZITASKPRIV_H_
-#define TIZITASKPRIV_H_
+#ifndef TIZI_TASKPRIV_H_
+#define TIZI_TASKPRIV_H_
 
-#include <core/iziTask.h>
+#include <izi/avr/core/task.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,4 +33,4 @@ void iziTaskFinalize();
 }
 #endif
 
-#endif /* TIZITASKPRIV_H_ */
+#endif /* TIZI_TASKPRIV_H_ */

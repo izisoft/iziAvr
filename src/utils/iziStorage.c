@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <core/iziKernel.h>
-#include <core/iziMutex.h>
-#include <core/iziMemory.h>
-#include <driver/iziEeprom.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/mutex.h>
+#include <izi/avr/core/memory.h>
+#include <izi/avr/driver/eeprom.h>
+#include <izi/avr/utils/crc.h>
+#include <izi/avr/utils/storage.h>
+
 #include <device/iziDevicePriv.h>
-#include <utils/iziCrc.h>
-#include <utils/iziStorage.h>
 
 extern uint8_t iziEepromWriteNative(IziEepromAddr_t position, const char *data, uint8_t dataCount);
 extern uint8_t iziEepromReadNative(IziEepromAddr_t position, char *data, uint8_t dataCount);

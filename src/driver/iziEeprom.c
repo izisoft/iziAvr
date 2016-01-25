@@ -1,10 +1,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <core/iziSemaphore.h>
-#include <core/iziMutex.h>
-#include <core/iziKernel.h>
-#include <driver/iziEeprom.h>
+#include <izi/avr/core/semaphore.h>
+#include <izi/avr/core/mutex.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/driver/eeprom.h>
 #include <device/iziDevicePriv.h>
 
 TIziSemaphore iziEepromSemph;

@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include <util/atomic.h>
-#include <core/iziMemory.h>
+#include <izi/avr/core/memory.h>
 #include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 

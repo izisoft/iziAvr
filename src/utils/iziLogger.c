@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <core/iziKernel.h>
-#include <core/iziMemory.h>
-#include <utils/iziLogger.h>
-#include <driver/iziUart.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/memory.h>
+#include <izi/avr/utils/logger.h>
+#include <izi/avr/driver/uart.h>
 
 void iziLoggerInit(uint32_t baudrate)
 {

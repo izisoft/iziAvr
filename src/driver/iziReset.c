@@ -1,9 +1,9 @@
 #include <avr/io.h>
 #include <avr/wdt.h>
 
-#include <iziAvr.h>
+#include <izi/avr/types.h>
 
-#include <driver/iziReset.h>
+#include <izi/avr/driver/reset.h>
 
 //=====================================================================
 void iziReset(TIziResetType resetType)

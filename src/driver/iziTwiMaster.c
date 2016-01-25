@@ -1,11 +1,11 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-#include <iziConf.h>
-#include <core/iziKernel.h>
-#include <core/iziMutex.h>
-#include <core/iziSemaphore.h>
-#include <driver/iziTwi.h>
+#include <izi/avr/config.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/mutex.h>
+#include <izi/avr/core/semaphore.h>
+#include <izi/avr/driver/twi.h>
 #include <device/iziDevicePriv.h>
 
 // Master

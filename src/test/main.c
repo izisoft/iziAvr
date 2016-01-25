@@ -1,16 +1,16 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <iziAvr.h>
-#include <core/iziKernel.h>
-#include <core/iziTask.h>
-#include <core/iziMemory.h>
-#include <driver/iziAdc.h>
-#include <driver/iziPin.h>
-#include <driver/iziTc1.h>
-#include <driver/iziTc2.h>
-#include <utils/iziConsole.h>
-#include <core/iziMutex.h>
+#include <izi/avr/types.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/task.h>
+#include <izi/avr/core/memory.h>
+#include <izi/avr/driver/adc.h>
+#include <izi/avr/driver/pin.h>
+#include <izi/avr/driver/tc1.h>
+#include <izi/avr/driver/tc2.h>
+#include <izi/avr/utils/console.h>
+#include <izi/avr/core/mutex.h>
 
 void iziKernelIdleHook()
 {

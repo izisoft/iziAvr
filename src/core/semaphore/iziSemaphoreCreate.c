@@ -1,4 +1,4 @@
-#include <core/iziSemaphore.h>
+#include <izi/avr/core/semaphore.h>
 
 void iziSemaphoreCreate(TIziSemaphore* semaphore, uint8_t isAvailable)
 {

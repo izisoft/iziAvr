@@ -1,5 +1,5 @@
-#ifndef IZIDEVICEPRIV_H_
-#define IZIDEVICEPRIV_H_
+#ifndef IZI_DEVICEPRIV_H_
+#define IZI_DEVICEPRIV_H_
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -8,9 +8,9 @@
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 
-#include <iziConf.h>
-#include <core/iziTask.h>
-#include <utils/iziPreprocessor.h>
+#include <izi/avr/config.h>
+#include <izi/avr/core/task.h>
+#include <izi/avr/utils/preprocessor.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -159,10 +159,7 @@ asm volatile ( "lds   r26, gIziCurrentTask              \n\t"  \
 
 #define IZI_SREG_INIT_VALUE             0x80
 
-#define IZI_RETURN_CRITICAL(val)        IZI_EXIT_CRITICAL();                    \
-                                        return (val)
-
-#define IZI_LOOP_CRITICAL()             IZI_ENTER_CRITICAL(); for(;;)
+#define IZI_LOOP_CRITICAL()             cli(); for(;;)
 
 #define IZI_RAM_BEGIN_ADDR              (0x0060)
 
@@ -192,4 +189,4 @@ asm volatile ( "lds   r26, gIziCurrentTask              \n\t"  \
 }
 #endif
 
-#endif /* IZIDEVICEPRIV_H_ */
+#endif /* IZI_DEVICEPRIV_H_ */

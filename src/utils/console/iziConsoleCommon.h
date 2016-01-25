@@ -1,7 +1,7 @@
-#ifndef IZICONSOLECOMMON_H_
-#define IZICONSOLECOMMON_H_
+#ifndef IZI_CONSOLECOMMON_H_
+#define IZI_CONSOLECOMMON_H_
 
-#include <utils/iziConsole.h>
+#include <izi/avr/utils/console.h>
 
 typedef struct SIziConsoleCommand TIziConsoleCommand;
 struct SIziConsoleCommand
@@ -13,4 +13,4 @@ struct SIziConsoleCommand
 
 extern TIziConsoleCommand *iziConsoleCommandList;
 
-#endif /* IZICONSOLECOMMON_H_ */
+#endif /* IZI_CONSOLECOMMON_H_ */

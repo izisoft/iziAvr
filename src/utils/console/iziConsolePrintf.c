@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#include <utils/iziConsole.h>
-#include <driver/iziUart.h>
-#include <core/iziMemory.h>
+#include <izi/avr/utils/console.h>
+#include <izi/avr/driver/uart.h>
+#include <izi/avr/core/memory.h>
 
 void iziConsolePrintf(const char* fmt,...)
 {

@@ -1,5 +1,5 @@
-#include <utils/iziConsole.h>
-#include <core/iziMemory.h>
+#include <izi/avr/utils/console.h>
+#include <izi/avr/core/memory.h>
 
 #include "iziConsoleCommon.h"
 

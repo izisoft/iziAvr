@@ -1,5 +1,6 @@
+#include <izi/avr/core/memory.h>
+
 #include <core/task/iziTaskPriv.h>
-#include <core/iziMemory.h>
 #include <device/iziDevicePriv.h>
 
 #include "iziKernelPriv.h"

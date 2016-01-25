@@ -40,8 +40,8 @@ Type of task scheduler used. Currently two scheduler implementations are availab
 Blink LED connected to 5<sup>th</sup> pin of port A.
 ```c
 
-#include <core/iziKernel.h>
-#include <driver/iziPin.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/driver/pin.h>
 
 void blink()
 {

@@ -1,8 +1,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <iziAvr.h>
-#include <driver/iziExtInt.h>
+#include <izi/avr/types.h>
+#include <izi/avr/driver/extInt.h>
 
 void (*iziExtIntHandlerTable[IZI_EXT_INT_COUNT])(void);
 

@@ -2,12 +2,12 @@
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 
-#include <iziConf.h>
-#include <driver/iziSpi.h>
-#include <core/iziMemory.h>
-#include <core/iziMutex.h>
-#include <core/iziSemaphore.h>
-#include <core/iziKernel.h>
+#include <izi/avr/config.h>
+#include <izi/avr/driver/spi.h>
+#include <izi/avr/core/memory.h>
+#include <izi/avr/core/mutex.h>
+#include <izi/avr/core/semaphore.h>
+#include <izi/avr/core/kernel.h>
 #include <device/iziDevicePriv.h>
 
 #define SS_PIN					eIziPinB4

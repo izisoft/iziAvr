@@ -1,4 +1,4 @@
-#include <utils/iziConsole.h>
+#include <izi/avr/utils/console.h>
 
 extern char iziConsoleBuffer[IZI_CONSOLE_BUFFER_SIZE];
 

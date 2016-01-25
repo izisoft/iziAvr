@@ -1,5 +1,5 @@
-#include <iziAvr.h>
-#include <core/iziSemaphore.h>
+#include <izi/avr/types.h>
+#include <izi/avr/core/semaphore.h>
 
 IziBool_t iziSemaphoreTaskeFromIsr(TIziSemaphore* semaphore)
 {

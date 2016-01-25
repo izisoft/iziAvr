@@ -1,11 +1,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <iziAvr.h>
-#include <driver/iziAdc.h>
-#include <core/iziKernel.h>
-#include <core/iziMutex.h>
-#include <core/iziSemaphore.h>
+#include <izi/avr/types.h>
+#include <izi/avr/driver/adc.h>
+#include <izi/avr/core/kernel.h>
+#include <izi/avr/core/mutex.h>
+#include <izi/avr/core/semaphore.h>
 
 #define ENABLE_ADC_INT()			ADCSRA |= _BV(ADIE)
 #define DISABLE_ADC_INT()			ADCSRA &= ~_BV(ADIE)

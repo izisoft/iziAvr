@@ -1,4 +1,4 @@
-#include <core/iziMutex.h>
+#include <izi/avr/core/mutex.h>
 
 void iziMutexCreate(TIziMutex* mutex)
 {
