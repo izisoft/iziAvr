@@ -124,7 +124,7 @@ void iziKernelYeldFromTick( void )
 #if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
 	iziKernelCheckStack();
 #endif
-    ++gIziTime;
+	++gIziTime;
 	iziKernelCheckWaitingTasks();
 	iziKernelSwitchContext();
 	IZI_RESTORE_CONTEXT();
@@ -153,10 +153,22 @@ IZI_SYSTEM_INTERRUPT()
 //==============================================================================
 // SYSTEM TASK
 //----------------------------------------------------------------------------
-void iziKernelTask()
+static void iziKernelCleanup()
 {
 	TIziTask* task;
+	IZI_ATOMIC_BLOCK()
+	{
+		while(gIziRemovedTaskList._iter != NULL)
+		{
+			task = gIziRemovedTaskList._iter;
+			gIziRemovedTaskList._iter = task->_next;
+			iziFree((void*)task);
+		}
+	}
+}
 
+void iziKernelTask()
+{
 	// Startup
 	iziKernelStartupHook();
 	iziKernelWakeAllSuspendedTasks();
@@ -167,17 +179,7 @@ void iziKernelTask()
 	while(1)
 	{
 		iziKernelIdleHook();
-
-		IZI_ATOMIC_BLOCK()
-		{
-			while(gIziRemovedTaskList._iter != NULL)
-			{
-				task = gIziRemovedTaskList._iter;
-				gIziRemovedTaskList._iter = task->_next;
-				iziFree((void*)task);
-			}
-		}
-
+		iziKernelCleanup();
 		iziKernelYeld();
 	}
 }
