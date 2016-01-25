@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <izi/avr/core/kernel.h>
 #include <izi/avr/core/memory.h>
 #include <izi/avr/core/task.h>
 #include <izi/avr/driver/uart.h>
 #include <izi/avr/utils/console.h>
 
+#include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 
 #include "iziConsoleCommon.h"
@@ -123,9 +123,9 @@ void iziConsolePrintf_P(const char* fmt, ...)
 
 TIziTask *iziConsoleInit(uint32_t baudrate, uint16_t stackSize)
 {
-	IZI_ASSERT(!iziKernelCheckState(eIziLoggerInit));
-	IZI_ASSERT(!iziKernelCheckState(eIziConsoleInit));
+	IZI_ASSERT(!IZI_GET_STATE(eIziLoggerInit));
+	IZI_ASSERT(!IZI_GET_STATE(eIziConsoleInit));
 	iziUartConfigureUnit(eIziUartInterface_0,baudrate);
-	iziKernelSetState(eIziConsoleInit);
+	IZI_SET_STATE(eIziConsoleInit);
 	return iziTaskCreate(iziConsoleTask,eIziPrioLow,stackSize,NULL);
 }

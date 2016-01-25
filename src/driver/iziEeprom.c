@@ -3,9 +3,9 @@
 
 #include <izi/avr/core/semaphore.h>
 #include <izi/avr/core/mutex.h>
-#include <izi/avr/core/kernel.h>
 #include <izi/avr/driver/eeprom.h>
 
+#include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 
 TIziSemaphore iziEepromSemph;
@@ -35,11 +35,11 @@ TIziMutex	iziEepromMutex;
 //=====================================================================
 void iziEepromInit( void )
 {
-	if(!iziKernelCheckState(eIziEepromInit))
+	if(!IZI_GET_STATE(eIziEepromInit))
 	{
 		iziSemaphoreCreate(&iziEepromSemph,IziFalse);
 		iziMutexCreate(&iziEepromMutex);
-		iziKernelSetState(eIziEepromInit);
+		IZI_SET_STATE(eIziEepromInit);
 	}
 }
 

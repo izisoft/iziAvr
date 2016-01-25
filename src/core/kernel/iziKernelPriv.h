@@ -1,9 +1,7 @@
 #ifndef IZI_KERNELPRIV_H_
 #define IZI_KERNELPRIV_H_
 
-#include <izi/avr/config.h>
-#include <izi/avr/core/task.h>
-#include <izi/avr/core/kernel.h>
+#include <izi/avr/core.h>
 
 #ifdef __cplusplus
 extern "C" {

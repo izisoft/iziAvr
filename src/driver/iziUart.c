@@ -3,10 +3,10 @@
 #include <avr/interrupt.h>
 #include <stdio.h>
 
-#include <izi/avr/core/kernel.h>
 #include <izi/avr/core/queue.h>
 #include <izi/avr/driver/uart.h>
 
+#include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 
 #define ENABLE_UART_TXINT()				UCSRB |= _BV(UDRIE)
@@ -30,7 +30,7 @@ volatile TIziQueue iziUartRxQueue;
 //=====================================================================
 static void iziUartInit( void )
 {
-	if(!iziKernelCheckState(eIziUartInit))
+	if(!IZI_GET_STATE(eIziUartInit))
 	{
 		iziQueueCreate(&iziUartTxQueue,IZI_UART_TX_QUEUE_SIZE,1);
 		iziQueueCreate(&iziUartRxQueue,IZI_UART_RX_QUEUE_SIZE,1);
@@ -40,7 +40,7 @@ static void iziUartInit( void )
 		UCSRB |= (1<<RXEN)|(1<<TXEN);
 		UCSRC |= (1<<URSEL)|(1<<UCSZ0)|(1<<UCSZ1);
 
-		iziKernelSetState(eIziUartInit);
+		IZI_SET_STATE(eIziUartInit);
 	}
 }
 

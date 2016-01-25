@@ -173,7 +173,7 @@ void iziKernelTask()
 	// Startup
 	iziKernelStartupHook();
 	iziKernelWakeAllSuspendedTasks();
-	iziKernelSetState(eIziKernelStarted);
+	IZI_SET_STATE(eIziKernelStarted);
 	iziKernelYeld();
 
 	// Idle loop

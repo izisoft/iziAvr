@@ -7,8 +7,8 @@
 #include <izi/avr/core/memory.h>
 #include <izi/avr/core/mutex.h>
 #include <izi/avr/core/semaphore.h>
-#include <izi/avr/core/kernel.h>
 
+#include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 
 #define SS_PIN					eIziPinB4
@@ -34,7 +34,7 @@ uint8_t iziSpiDataCount;
 //=====================================================================
 static void iziSpiInit()
 {	
-	if(!iziKernelCheckState(eIziSpiInit))
+	if(!IZI_GET_STATE(eIziSpiInit))
 	{
 		iziPinSetType(SS_PIN, eIziPinOut);
 		iziPinSetType(MOSI_PIN, eIziPinOut);

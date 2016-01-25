@@ -2,18 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <izi/avr/core/kernel.h>
 #include <izi/avr/core/memory.h>
 #include <izi/avr/driver/uart.h>
 #include <izi/avr/utils/logger.h>
 
+#include <core/kernel/iziKernelPriv.h>
+
 void iziLoggerInit(uint32_t baudrate)
 {
-	IZI_ASSERT(!iziKernelCheckState(eIziLoggerInit));
-	IZI_ASSERT(!iziKernelCheckState(eIziConsoleInit));
+	IZI_ASSERT(!IZI_GET_STATE(eIziLoggerInit));
+	IZI_ASSERT(!IZI_GET_STATE(eIziConsoleInit));
 
 	iziUartConfigureUnit(eIziUartInterface_0,baudrate);
-	iziKernelSetState(eIziLoggerInit);
+	IZI_SET_STATE(eIziLoggerInit);
 }
 
 void iziLog(const char* fmt,...)

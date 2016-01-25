@@ -2,11 +2,11 @@
 #include <avr/io.h>
 
 #include <izi/avr/config.h>
-#include <izi/avr/core/kernel.h>
 #include <izi/avr/core/mutex.h>
 #include <izi/avr/core/semaphore.h>
 #include <izi/avr/driver/twi.h>
 
+#include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 
 // Master
@@ -67,11 +67,11 @@ void iziTwiInit(uint8_t bitrateKHz)
 
 	TWCR = _BV2(TWEA,TWEN);
 
-	if(!iziKernelCheckState(eIziTwiInit))
+	if(!IZI_GET_STATE(eIziTwiInit))
 	{
 		iziMutexCreate(&iziTwiMutex);
 		iziSemaphoreCreate(&iziTwiReady,0);
-		iziKernelSetState(eIziTwiInit);
+		IZI_SET_STATE(eIziTwiInit);
 	}
 }
 

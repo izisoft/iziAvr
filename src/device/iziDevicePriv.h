@@ -8,8 +8,7 @@
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 
-#include <izi/avr/config.h>
-#include <izi/avr/core/task.h>
+#include <izi/avr/core.h>
 #include <izi/avr/utils/preprocessor.h>
 
 #ifdef __cplusplus

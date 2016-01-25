@@ -30,19 +30,26 @@ enum EIziStateFlagDef
 	eIziConsoleInit,	//!< Flag indicating iziConsole utility startup
 	eIziStorageInit, 	//!< Flag indicating iziStorage utility startup
 	eIziLoggerInit,		//!< Flag indicating iziLogger utility startup
-	eIziMallocError,
-	eIziStackOverflow,
+	eIziMallocError,    //!< Flag indicating fatal error during memory allocation
+	eIziStackOverflow,  //!< Flag indicating stack corruption detection
 };
 typedef enum EIziStateFlagDef EIziStateFlag;
 
+/*!
+ *
+ */
 void iziKernelYeld();
 
-IziBool_t iziKernelCheckState(EIziStateFlag flag);
-
-void iziKernelSetState(EIziStateFlag flag);
-
+/*! Function providing access to currently executed task.
+ *
+ * \return
+ * Pointer to task being currently executed.
+ */
 TIziTask* iziKernelCurrentTask();
 
+/*! Starts kernel scheduler.
+ *
+ */
 void iziKernelStart();
 
 #ifdef __cplusplus

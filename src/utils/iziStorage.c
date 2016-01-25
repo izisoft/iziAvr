@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <izi/avr/core/kernel.h>
 #include <izi/avr/core/mutex.h>
 #include <izi/avr/core/memory.h>
 #include <izi/avr/driver/eeprom.h>
 #include <izi/avr/utils/crc.h>
 #include <izi/avr/utils/storage.h>
 
+#include <core/kernel/iziKernelPriv.h>
 #include <device/iziDevicePriv.h>
 
 extern uint8_t iziEepromWriteNative(IziEepromAddr_t position, const char *data, uint8_t dataCount);
@@ -33,7 +33,7 @@ static void iziStorageUpdateTable()
 //------------------------------------------------------------------------------------------
 void iziStorageInit(uint8_t storageSize)
 {
-	if(!iziKernelCheckState(eIziStorageInit))
+	if(!IZI_GET_STATE(eIziStorageInit))
 	{
 		IziCrc_t storageCrc,readCrc;
 		TIziStorageElement* storagePtr = iziMalloc(storageSize * sizeof(TIziStorageElement));
@@ -55,7 +55,7 @@ void iziStorageInit(uint8_t storageSize)
 			iziStorage->position_ = IZI_EE_STORAGE_START+iziStorageSize*sizeof(TIziStorageElement)+sizeof(IziCrc_t);
 			iziStorageUpdateTable();
 		}
-		iziKernelSetState(eIziStorageInit);
+		IZI_SET_STATE(eIziStorageInit);
 	}
 }
 //------------------------------------------------------------------------------------------
