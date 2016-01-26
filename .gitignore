@@ -16,3 +16,7 @@
 /debug/
 /release/
 /build/
+
+# Doxygen outputs
+/html/
+/latex/

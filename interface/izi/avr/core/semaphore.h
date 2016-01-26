@@ -7,24 +7,17 @@
 extern "C" {
 #endif
 
-/**
- *	\addtogroup iziKernel
+/*!
+ *	\addtogroup core
  *	@{
  */
 
-/** \file iziSemaphore.h
- * Simple implementation of binary semaphore functionality for iziKernel
- * RTOS. Counting semaphores will be supported in future versions of kernel
- * (v2.0 onwards).
+/*! \file semaphore.h
+ * Simple implementation of binary semaphore functionality for iziAvr.
  */
 
-/** \typedef TIziSemaphore
- * Type of semaphore used in iziKernel RTOS.
- */
-typedef volatile struct SIziSemaphore TIziSemaphore;
-
-/** \struct SIziSemaphore
- * Structure holding implementation of iziKernel binary semaphore.
+/*! \struct SIziSemaphore
+ * Structure holding semaphore data.
  */
 struct SIziSemaphore
 {
@@ -32,8 +25,12 @@ struct SIziSemaphore
 	TIziTaskList _subscribers;	//!< List of tasks that has subscribed semaphore.
 };
 
-/** \fn iziSemaphoreCreate(TIziSemaphore *semaphore,uint8_t isAvailable)
- * Function used to create semaphore for iziKernel. It must be called
+/*! \typedef TIziSemaphore
+ * Type defined over semaphore structure for convenience.
+ */
+typedef struct SIziSemaphore TIziSemaphore;
+
+/*! Function used to create semaphore for iziKernel. It must be called
  * before first use of semaphore!
  * \param semaphore
  * Pointer to semaphore to be created.
@@ -44,8 +41,7 @@ struct SIziSemaphore
  */
 void iziSemaphoreCreate(TIziSemaphore *semaphore,uint8_t isAvailable);
 
-/** \fn iziSemaphoreTake(TIziSemaphore *semaphore,IziDelay_t waitTicks)
- * Function takes semaphore if available.
+/*! Function takes semaphore if available.
  * \param semaphore
  * Pointer to semaphore to be taken
  * \param waitTicks
@@ -56,8 +52,7 @@ void iziSemaphoreCreate(TIziSemaphore *semaphore,uint8_t isAvailable);
  */
 IziBool_t iziSemaphoreTake(TIziSemaphore *semaphore,IziDelay_t waitTicks);
 
-/** \fn iziSemaphoreTaskeFromIsr(TIziSemaphore *semaphore)
- * Function takes semaphore if available from interrupt service routine.
+/*! Function takes semaphore if available from interrupt service routine.
  * \param semaphore
  * Pointer to semaphore to be taken.
  * \return
@@ -65,8 +60,7 @@ IziBool_t iziSemaphoreTake(TIziSemaphore *semaphore,IziDelay_t waitTicks);
  */
 IziBool_t iziSemaphoreTaskeFromIsr(TIziSemaphore *semaphore);
 
-/** \fn iziSemaphoreGive(TIziSemaphore *semaphore)
- * Function gives semaphore. After call semaphore is available to
+/*! Function gives semaphore. After call semaphore is available to
  * be taken.
  * \param semaphore
  * Pointer to semaphore to be given
@@ -76,8 +70,7 @@ IziBool_t iziSemaphoreTaskeFromIsr(TIziSemaphore *semaphore);
  */
 IziBool_t iziSemaphoreGive(TIziSemaphore *semaphore);
 
-/** \fn iziSemaphoreGiveFromIsr(TIziSemaphore *semaphore,uint8_t *needYeld)
- * Function gives semaphore if available from interrupt service routine.
+/*! Function gives semaphore if available from interrupt service routine.
  * \param semaphore
  * Pointer to semaphore to be given
  * \param needYeld

@@ -1,6 +1,13 @@
 #ifndef IZI_TASK_H_
 #define IZI_TASK_H_
 
+/*!
+ *	\addtogroup core
+ *	@{
+ *
+ *	\file task.h
+ */
+
 #include <izi/avr/types.h>
 #include <izi/avr/config.h>
 
@@ -8,13 +15,14 @@
 extern "C" {
 #endif
 
+//! List of available task priorities.
 enum EIziTaskPriorityDef
 {
-	eIziPrioLow = 0,
-	eIziPrioMedium = IZI_PRIORITY_MEDIUM_VALUE,
-	eIziPrioHigh = IZI_PRIORITY_HIGH_VALUE,
-	eIziPrioRT,
-	IZI_PRIORITY_COUNT
+	eIziPrioLow = 0,                           //!< Lowest possible task priority. Used by kernel task.
+	eIziPrioMedium = IZI_PRIORITY_MEDIUM_VALUE,//!< Medium task priority.
+	eIziPrioHigh = IZI_PRIORITY_HIGH_VALUE,    //!< High task priority.
+	eIziPrioRT,                                //!< Highest possible task priority, should be used for most important tasks with RT operations.
+	IZI_PRIORITY_COUNT                         //!< Number of available priorities, used by scheduler to navigate on task queues.
 };
 
 typedef enum EIziTaskPriorityDef EIziTaskPriority;
@@ -27,6 +35,9 @@ struct SIziTaskList
 	TIziTask* _iter;
 };
 
+/*!
+ *
+ */
 struct SIziTask
 {
 	uint8_t* _stackPointer;
@@ -56,7 +67,6 @@ struct SIziTask
 };
 
 /*! Creates new task for set of given parameters.
- *
  * \param callback
  * Entry point for task. Note that multiple tasks can share the same entry point.
  * \param priority
@@ -73,46 +83,54 @@ struct SIziTask
 TIziTask* iziTaskCreate(void (*callback)(void), EIziTaskPriority priority,
 	IziSize_t stackSize, void* param);
 
-/** \fn iziTaskSubscribeTick( IziTick_t tick)
- * Every second contains exactly IZI_SYSTEM_TICK_RATE ticks. Calling
+/*! Every second contains exactly IZI_SYSTEM_TICK_RATE ticks. Calling
  * this function will suspend execution of caller until specified tick
  * in second appears. If current system tick is already higher than tick
- * specified, task will wake up within next second. *
+ * specified, task will wake up within next second.
+ * \param tick
+ * Specific tick on which task should be woken up.
  */
 void iziTaskSubscribeTick(IziTick_t tick);
 
-/** \fn iziTaskDelay( IziDelay_t waitTicks )
- * Suspends execution of caller for at least specified number of ticks.
+/*! Suspends execution of caller for at least specified number of ticks.
+ * \param waitTicks
+ * Number of tick for which task should be suspended
  */
 void iziTaskDelay(IziDelay_t waitTicks);
 
-/** \fn iziTaskDelayMs( IziDelay_t waitTicks )
- * Suspends execution of caller for specified amount of milliseconds.
+/*! Suspends execution of caller for specified amount of milliseconds.
  * Accuracy of this method depends on IZI_SYSTEM_TICK_RATE definition
  * and system clock frequency.
+ * \param waitMs
+ * Number of milliseconds for which task should be suspended
  */
 void iziTaskDelayMs(IziDelay_t waitMs);
 
-/** \fn iziTaskDelaySec( IziDelay_t waitSeconds )
- * Suspends execution of caller for specified amount of seconds.
+/*! Suspends execution of caller for specified amount of seconds.
  * Accuracy of this method depends on IZI_SYSTEM_TICK_RATE definition
  * and system clock frequency.
+ * \param waitSeconds
+ * Number of seconds for which task should be suspended
  */
 void iziTaskDelaySec(IziDelay_t waitSeconds);
 
+//! Provides access to parameters of current task.
 void* iziTaskGetParams();
 
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
-
-/** \fn iziTaskKill(TIziTask* task)
- * Functionality not present in tiny kernel model.
+/*! Kill given task. Task execution is not interrupted instantly. Instead
+ * it is moved out of active task list, thus it's not taken into consideration
+ * during next context switch performed by scheduler. Task memory is freed
+ * during cleanup, performed by system task.
+ *
+ * \param task
+ * Pointer to task that should be killed.
  */
-void iziTaskKill( TIziTask* task) ;
-
-#endif
+void iziTaskKill(TIziTask* task) ;
 
 #ifdef __cplusplus
 }
 #endif
+
+/// @}
 
 #endif /* IZI_TASK_H_ */

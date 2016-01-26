@@ -1,6 +1,14 @@
 #ifndef IZI_KERNEL_H_
 #define IZI_KERNEL_H_
 
+/*!
+ *	\addtogroup core
+ *	@{
+ *
+ *	\file kernel.h
+ */
+
+
 #include <izi/avr/types.h>
 #include <izi/avr/config.h>
 #include <izi/avr/core/task.h>
@@ -35,8 +43,10 @@ enum EIziStateFlagDef
 };
 typedef enum EIziStateFlagDef EIziStateFlag;
 
-/*!
+/*! Forces scheduler context switch.
  *
+ * \note Calling this function doesn't mean that scheduler will peak up
+ * different task for execution than the current one.
  */
 void iziKernelYeld();
 
@@ -55,5 +65,7 @@ void iziKernelStart();
 #ifdef __cplusplus
 }
 #endif
+
+/// @}
 
 #endif /* IZI_KERNEL_H_ */

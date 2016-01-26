@@ -8,44 +8,41 @@ extern "C" {
 #endif
 
 /**
- * \addtogroup iziKernel
+ * \addtogroup core
  * @{
  *
- * \file iziMutex.h
- * Implementation of simple mutex used in iziKernel RTOS.
- * iziMutex supports priority inheritance. Thanks that, if
- * task holding mutex has lower priority than task waiting for
- * it, mutex holder priority is raised temporarily to level of
- * waiting task (it prevents priority inversion problem).
- * Recursive mutexes will be supported in further versions of iziKernel.
+ * \file mutex.h
+ * Implementation of simple mutex used in iziAvr library.
+ * iziMutex supports priority inheritance. Thanks to that feature, if
+ * task holding mutex has lower priority than task waiting for it,
+ * mutex holder priority is raised temporarily to level of waiting task
+ * (it prevents priority inversion problem).
  */
 
 /** \struct SIziMutex
  * Structure holding mutex data.
  */
-typedef struct SIziMutex
+struct SIziMutex
 {
-	int8_t _value;	//!< Current mutex state.
-	TIziTask *_owner;	//!< Pointer to mutex owner task.
-	EIziTaskPriority _ownerPriority;	//!< Original priority of mutex owner.
-	TIziTaskList _subscribers;	//!< List of tasks that has subsrcibed mutex.
-} TIziMutex;
+	int8_t _value;                      //!< Current mutex state.
+	TIziTask *_owner;                   //!< Pointer to mutex owner task.
+	EIziTaskPriority _ownerPriority;    //!< Original priority of mutex owner.
+	TIziTaskList _subscribers;          //!< List of tasks that has subscribed mutex.
+};
 
 /** \typedef TIziMutex
- * Type for mutex used in iziKernel RTOS.
+ * Type defined over mutex structure for convenience.
  */
-//typedef volatile struct SIziMutex TIziMutex;
+typedef struct SIziMutex TIziMutex;
 
-/** \fn iziMutexCreate(TIziMutex *mutex)
- * Function creates and initializes mutex. It must be called before
+/*! Function creates and initializes mutex. It must be called before
  * very first usage of mutex.
  * \param mutex
  * Pointer to mutex to be initialized.
  */
-void iziMutexCreate(TIziMutex *mutex);
+void iziMutexCreate(TIziMutex* mutex);
 
-/** \fn iziMutexTake(TIziMutex *mutex, IziDelay_t waitTicks)
- * Function attempts to take mutex if available.
+/*! Function attempts to take mutex if available.
  * \param mutex
  * Pointer to mutex to be taken.
  * \param waitTicks
@@ -56,8 +53,7 @@ void iziMutexCreate(TIziMutex *mutex);
  */
 IziBool_t iziMutexTake(TIziMutex *mutex, IziDelay_t waitTicks);
 
-/** \fn iziMutexGive(TIziMutex *mutex)
- * Function attempts to give mutex.
+/*! Function attempts to give mutex.
  * \param mutex
  * Pointer to mutex to be given.
  * \return
@@ -66,8 +62,7 @@ IziBool_t iziMutexTake(TIziMutex *mutex, IziDelay_t waitTicks);
  */
 IziBool_t iziMutexGive(TIziMutex *mutex);
 
-/** \fn iziMutexCheck(TIziMutex *mutex)
- * Function checks current status of iziMutex.
+/*! Function checks current status of iziMutex.
  * \return
  * IziTrue if mutex is free to be taken, IziFalse otherwise.
  */
