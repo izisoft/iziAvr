@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 /**
- * \addtogroup iziPlatform
+ * \addtogroup driver
  * @{
  *
  * \file adc.h
@@ -20,19 +20,21 @@ extern "C" {
  ** \typedef TIziAdcRef
  *  Type for possible reference voltage source in AVR.
  */
-typedef enum
+enum EIziAdcReferenceDef
 {
 	eIziAdcRefAref,   		//!< Reference voltage connected to AREF pin.
-	eIziAdcRefAvcc,	  		//!< Supplay voltage is considered as reference.
+	eIziAdcRefAvcc,	  		//!< Supply voltage is considered as reference.
 	eIziAdcRefInternal=3 	//!< Turns on internal 2.56V reference source.
-} EIziAdcReference;
+};
+
+typedef enum EIziAdcReferenceDef EIziAdcReference;
 
 /** \enum EIziAdcPrescaler
  *
  ** \typedef TIziAdcPrescaler
  *  Type for possible clock prescaler in AD converter.
  */
-typedef enum EIziAdcPrescaler
+enum EIziAdcPrescalerDef
 {
 	eIziAdcClkDiv2=1,	//!< Clock divided by 2
 	eIziAdcClkDiv4,		//!< Clock divided by 4
@@ -41,14 +43,16 @@ typedef enum EIziAdcPrescaler
 	eIziAdcClkDiv32,	//!< Clock divided by 32
 	eIziAdcClkDiv64,	//!< Clock divided by 64
 	eIziAdcClkDiv128	//!< Clock divided by 128
-} EIziAdcPrescaler;
+};
+
+typedef enum EIziAdcPrescalerDef EIziAdcPrescaler;
 
 /** \enum EIziAdcChannel
  *
  ** \typedef TIziAdcChannel
  *  Type for conversion channel to be measured.
  */
-typedef enum
+enum EIziAdcChannelDef
 {
 	eIziAdcCh0,
 	eIziAdcCh1,
@@ -80,18 +84,16 @@ typedef enum
 	eIziAdcCh3_Ch2,
 	eIziAdcCh4_Ch2,
 	eIziAdcCh5_Ch2
-} EIziAdcChannel;
+};
 
-/** \fn iziAdcInit(TIziAdcPrescaler prescaler,TIziAdcRef reference)
- *  Initializaton of AD converter. It must be executed before
- *  first usage of ADC.
+typedef enum EIziAdcChannelDef EIziAdcChannel;
+
+/** Configuration of AD converter. It must be executed before first usage of ADC.
  *  \param prescaler
- *  	Prescaler for system clock.
+ *  Prescaler for system clock.
  *  \param reference
- *  	Reference voltage source.
+ *  Reference voltage source.
  */
-void iziAdcInit();
-
 void iziAdcConfigure(EIziAdcPrescaler prescaler, EIziAdcReference reference);
 
 /** \fn iziAdcTurnOn()
@@ -104,16 +106,15 @@ void iziAdcEnable();
  */
 void iziAdcDisable();
 
-/** \fn iziAdcReadChannel(TIziAdcChannel channel)
- *	Function executes AD conversion for choosen channel.
+/** Function executes AD conversion for chosen channel.
  *	Code is safe to use under iziKernel control. ADC unit is
  *	protected by iziMutex, and ongoing conversion doesn't take
  *	kernel time (synchronized by iziSemaphore).
  *
  *	\param channel
- *		AD channel to be read.
+ *	AD channel to be read.
  *	\return
- *		Conversion result.
+ *	Conversion result.
  */
 uint16_t iziAdcReadChannel(EIziAdcChannel channel);
 

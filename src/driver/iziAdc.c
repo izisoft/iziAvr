@@ -10,15 +10,8 @@
 #define ENABLE_ADC_INT()			ADCSRA |= _BV(ADIE)
 #define DISABLE_ADC_INT()			ADCSRA &= ~_BV(ADIE)
 
-TIziMutex gIziAdcMutex;
-TIziSemaphore gIziAdcSemaphore;
-
-//=====================================================================
-void iziAdcInit()
-{
-	iziMutexCreate(&gIziAdcMutex);
-	iziSemaphoreCreate(&gIziAdcSemaphore,IziFalse);
-}
+TIziMutex gIziAdcMutex = IZI_MUTEX_INITIALIZER;
+TIziSemaphore gIziAdcSemaphore = IZI_SEMAPHORE_INITIALIZER(0);
 
 void iziAdcConfigure(EIziAdcPrescaler prescaler, EIziAdcReference reference)
 {
@@ -31,18 +24,16 @@ void iziAdcConfigure(EIziAdcPrescaler prescaler, EIziAdcReference reference)
 	ADCSRA |= prescaler;
 }
 
-//=====================================================================
 void iziAdcEnable()
 {
 	ADCSRA |= _BV(ADEN);
 }
-//--
+
 void iziAdcDisable()
 {
 	ADCSRA &= ~_BV(ADEN);
 }
 
-//=====================================================================
 uint16_t iziAdcReadChannel(EIziAdcChannel channel)
 {
 	uint16_t retVal;

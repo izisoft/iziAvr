@@ -51,7 +51,7 @@ TIziPidController *iziPidCreate(uint16_t (*getValue)(), void (*setOutput)(uint16
 	TIziPidController *pidController;
 	
 	pidController = iziMalloc(sizeof(TIziPidController));
-	pidController->pidTask = iziTaskCreate(iziPidTask,eIziPrioRT,IZI_PID_STACK_SIZE, NULL);
+	pidController->pidTask = iziTaskCreate(iziPidTask,eIziTaskPrioRT,IZI_PID_STACK_SIZE, NULL);
 	pidController->pidTask->_params = (void*)(pidController);
 	
 	pidController->Kp = Kp;

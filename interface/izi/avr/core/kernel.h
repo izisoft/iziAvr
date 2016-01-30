@@ -8,7 +8,6 @@
  *	\file kernel.h
  */
 
-
 #include <izi/avr/types.h>
 #include <izi/avr/config.h>
 #include <izi/avr/core/task.h>
@@ -19,7 +18,8 @@ extern "C" {
 #endif
 
 #define IZI_DEVICE_SIGNATURE IZI_PP_CAT3(SIGNATURE_0,SIGNATURE_1,SIGNATURE_2)
-#define IZI_COMPILATION_HASH IZI_PP_UCAT4(IZI_DEVICE_SIGNATURE,IZI_CPU_FREQ,IZI_SYSTEM_TICK_SOURCE,IZI_SYSTEM_TICK_RATE)
+#define IZI_COMPILATION_HASH IZI_PP_UCAT5(IZI_DEVICE_SIGNATURE,IZI_CPU_FREQ,\
+								IZI_KERNEL_TYPE,IZI_SYSTEM_TICK_SOURCE,IZI_SYSTEM_TICK_RATE)
 
 #define iziKernelStart IZI_PP_CAT(_iziKernelStart_, IZI_COMPILATION_HASH)
 

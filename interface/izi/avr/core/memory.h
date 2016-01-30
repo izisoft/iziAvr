@@ -14,7 +14,7 @@ void* iziMalloc(size_t size);
 
 void iziFree(void *ptr);
 
-#ifdef IZI_MEMORY_MONITOR
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
 
 IziSize_t iziGetUsedMemory();
 

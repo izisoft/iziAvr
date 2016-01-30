@@ -1,7 +1,7 @@
 #include <core/task/iziTaskPriv.h>
 #include <device/iziDevicePriv.h>
 
-#ifdef IZI_KERNEL_DEBUG
+#if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
 
 volatile uint16_t gIziKernelDebugSecond = 0;
 volatile uint32_t gIziKernelDebugYeldCount = 0;
@@ -10,7 +10,7 @@ void iziKernelDebugForeachTask(void (*callback)(TIziTask*))
 {
 	TIziTask* end;
 	TIziTask* task;
-	for(uint8_t i = 0; i < IZI_PRIORITY_COUNT; ++i)
+	for(uint8_t i = 0; i < IZI_TASK_PRIORITY_COUNT; ++i)
 	{
 		task = end = gIziActiveTaskList[i]._iter;
 		if(task != NULL)

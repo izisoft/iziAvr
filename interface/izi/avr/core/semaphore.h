@@ -25,6 +25,8 @@ struct SIziSemaphore
 	TIziTaskList _subscribers;	//!< List of tasks that has subscribed semaphore.
 };
 
+#define IZI_SEMAPHORE_INITIALIZER(value) {value, {NULL}}
+
 /*! \typedef TIziSemaphore
  * Type defined over semaphore structure for convenience.
  */

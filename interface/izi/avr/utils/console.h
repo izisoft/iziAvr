@@ -35,13 +35,6 @@ typedef void (*TIziConsoleCallback)();
  */
 TIziTask* iziConsoleInit(uint32_t baudrate, uint16_t stackSize);
 
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
-/** \fn iziConsolePrintVersion()
- *	Function prints version of used iziavr library.
- */
-void iziConsolePrintVersion();
-#endif
-
 /** \fn iziConsolePrintCmdList()
  * Function prints the list of available commands.
  */

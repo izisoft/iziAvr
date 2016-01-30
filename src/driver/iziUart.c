@@ -21,11 +21,8 @@
 #define IZI_UART_TX_QUEUE_SIZE			8
 #define IZI_UART_RX_QUEUE_SIZE			8
 
-volatile char *iziUartDataPtr;
-volatile uint8_t iziUartDataCount;
-
-volatile TIziQueue iziUartTxQueue;
-volatile TIziQueue iziUartRxQueue;
+TIziQueue iziUartTxQueue;
+TIziQueue iziUartRxQueue;
 
 //=====================================================================
 static void iziUartInit( void )
@@ -99,9 +96,12 @@ ISR(USART_UDRE_vect)
 	IziBool_t needYeld = IziFalse;
 	char c;
 
-	if(iziQueueGetFromIsr(&iziUartTxQueue,(void *)(&c),&needYeld) == IziTrue) {
+	if(iziQueueGetFromIsr(&iziUartTxQueue,(void *)(&c),&needYeld) == IziTrue)
+	{
 		UDR = c;
-	} else {
+	}
+	else
+	{
 		DISABLE_UART_TXINT();
 		if(needYeld == IziTrue)
 		{
@@ -117,7 +117,8 @@ ISR(USART_RXC_vect)
 
 	iziQueuePutFromIsr(&iziUartRxQueue,(void *)(&c),&needYeld);
 
-	if(needYeld == IziTrue) {
+	if(needYeld == IziTrue)
+	{
 		iziKernelYeld();
 	}
 }

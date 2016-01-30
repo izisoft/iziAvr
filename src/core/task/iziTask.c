@@ -194,7 +194,7 @@ TIziTask* iziTaskCreate(void (*taskFunction)(void), EIziTaskPriority priority,
 	task->_priority = (uint8_t)priority;
 	task->_wakeUpTick = 0;
 	task->_eowner = NULL;
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
 	task->_params = param;
 #endif
 

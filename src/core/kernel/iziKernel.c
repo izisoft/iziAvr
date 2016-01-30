@@ -13,16 +13,12 @@
 
 volatile TIziTask* gIziCurrentTask = NULL;
 volatile TIziTask* gIziKernelTask = NULL;
-volatile TIziActiveTaskList gIziActiveTaskList[IZI_PRIORITY_COUNT] = {IZI_ACTIVE_TASK_LIST_INITIALIZER};
+volatile TIziActiveTaskList gIziActiveTaskList[IZI_TASK_PRIORITY_COUNT] = {IZI_ACTIVE_TASK_LIST_INITIALIZER};
 volatile TIziTaskList gIziWaitingTaskList = {NULL};
 volatile TIziTaskList gIziSuspendedTaskList = {NULL};
 volatile TIziTaskList gIziRemovedTaskList = {NULL};
 volatile IziTime_t gIziTime;
 volatile uint16_t gIziState = 0;
-
-//==============================================================================
-// DEFINITIONS
-#define IZI_KERNEL_TASK_STACK (128)
 
 //==============================================================================
 // SCHEDULERS
@@ -31,7 +27,7 @@ volatile uint16_t gIziState = 0;
 // HPF scheduler (High Priority First)
 static void iziKernelSwitchContext()
 {
-	for(uint8_t i = IZI_PRIORITY_COUNT - 1; i >= 0; i--)
+	for(uint8_t i = IZI_TASK_PRIORITY_COUNT - 1; i >= 0; i--)
 	{
 		if(gIziActiveTaskList[i]._iter != NULL)
 		{
@@ -52,7 +48,7 @@ static void iziKernelSwitchContext()
 	gIziActiveTaskList[j]._score = (gIziActiveTaskList[j]._taskCount)+(j*j);
 
 	j = 0;
-	for(uint8_t i = IZI_PRIORITY_COUNT - 1; i >= 0; i--)
+	for(uint8_t i = IZI_TASK_PRIORITY_COUNT - 1; i >= 0; i--)
 	{
 		if(gIziActiveTaskList[i]._iter != NULL)
 		{
@@ -97,7 +93,7 @@ static void iziKernelWakeAllSuspendedTasks()
 			iziTaskActivate(gIziSuspendedTaskList._iter);
 		}
 #if IZI_KERNEL_SCHEDULER == IZI_KERNEL_SCHEDULER_FTS
-		for(uint8_t i = 0; i < IZI_PRIORITY_COUNT; i++)
+		for(uint8_t i = 0; i < IZI_TASK_PRIORITY_COUNT; i++)
 		{
 			gIziActiveTaskList[i]._score = (gIziActiveTaskList[i]._taskCount)+(i*i);
 		}
@@ -105,7 +101,7 @@ static void iziKernelWakeAllSuspendedTasks()
 	}
 }
 //------------------------------------------------------------------------------
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
 static void iziKernelCheckStack()
 {
 	if(gIziCurrentTask->_stackPointer < (uint8_t*)(&(gIziCurrentTask->_params)+1))
@@ -122,8 +118,11 @@ void iziKernelYeldFromTick( void )
 {
 	IZI_SAVE_CONTEXT();
 	IZI_SET_KERNEL_STACK();
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
 	iziKernelCheckStack();
+#endif
+#if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
+	//iziKernelMonitoring();
 #endif
 	++gIziTime;
 	iziKernelCheckWaitingTasks();
@@ -138,8 +137,11 @@ void iziKernelYeld( void )
 {
 	IZI_SAVE_CONTEXT();
 	IZI_SET_KERNEL_STACK();
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
 	iziKernelCheckStack();
+#endif
+#if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
+	//iziKernelMonitoring();
 #endif
 	iziKernelSwitchContext();
 	IZI_RESTORE_CONTEXT();
@@ -192,7 +194,7 @@ void iziKernelStart()
 {
 	// Create kernel idle and startup task
 	gIziKernelTask = iziTaskCreate(iziKernelTask,
-					eIziPrioLow,
+					eIziTaskPrioLow,
 					IZI_KERNEL_TASK_STACK,
 					NULL);
 	iziTaskActivate((TIziTask*)gIziKernelTask);

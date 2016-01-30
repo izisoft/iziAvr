@@ -15,14 +15,22 @@
 extern "C" {
 #endif
 
+#if IZI_KERNEL_TYPE == IZI_KERNEL_TINY
+	#define IZI_PRIORITY_MEDIUM_VALUE 0
+	#define IZI_PRIORITY_HIGH_VALUE   0
+#else
+	#define IZI_PRIORITY_MEDIUM_VALUE 1
+	#define IZI_PRIORITY_HIGH_VALUE   2
+#endif
+
 //! List of available task priorities.
 enum EIziTaskPriorityDef
 {
-	eIziPrioLow = 0,                           //!< Lowest possible task priority. Used by kernel task.
-	eIziPrioMedium = IZI_PRIORITY_MEDIUM_VALUE,//!< Medium task priority.
-	eIziPrioHigh = IZI_PRIORITY_HIGH_VALUE,    //!< High task priority.
-	eIziPrioRT,                                //!< Highest possible task priority, should be used for most important tasks with RT operations.
-	IZI_PRIORITY_COUNT                         //!< Number of available priorities, used by scheduler to navigate on task queues.
+	eIziTaskPrioLow = 0,                           //!< Lowest possible task priority. Used by kernel task.
+	eIziTaskPrioMedium = IZI_PRIORITY_MEDIUM_VALUE,//!< Medium task priority.
+	eIziTaskPrioHigh = IZI_PRIORITY_HIGH_VALUE,    //!< High task priority.
+	eIziTaskPrioRT,                                //!< Highest possible task priority, should be used for most important tasks with RT operations.
+	IZI_TASK_PRIORITY_COUNT                         //!< Number of available priorities, used by scheduler to navigate on task queues.
 };
 
 typedef enum EIziTaskPriorityDef EIziTaskPriority;
@@ -54,15 +62,15 @@ struct SIziTask
 	uint8_t _priority;
 	uint32_t _wakeUpTick;
 
-#ifndef IZI_KERNEL_DEBUG
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
+	void* _params;
+#endif
+
+#if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
 	IziSize_t _stackSize;
 	uint32_t _yeldCount;
 	uint8_t _stackUtilization;
 	uint8_t _cpuUtilization;
-#endif
-
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_TINY
-	void* _params;
 #endif
 };
 

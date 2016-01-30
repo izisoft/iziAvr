@@ -40,7 +40,7 @@ Type of task scheduler used. Currently two scheduler implementations are availab
 Blink LED connected to 5<sup>th</sup> pin of port A.
 ```c
 
-#include <izi/avr/core/kernel.h>
+#include <izi/avr/core.h>
 #include <izi/avr/driver/pin.h>
 
 void blink()
@@ -57,6 +57,52 @@ void blink()
 int iziMain()
 {
 	iziTaskCreate(blink, eIziPrioLow, 100, NULL);
+	iziKernelStart();
+	return 0;
+}
+```
+
+Blink LED with delay configured by voltage on analog input.
+```c
+#include <izi/avr/core.h>
+#include <izi/avr/driver/adc.h>
+#include <izi/avr/driver/pin.h>
+
+static uint16_t gDelay = 0;
+
+void blink()
+{
+	iziPinSetType(eIziPinA5, eIziPinOut);
+
+    for(;;)
+    {
+        iziPinToggle(eIziPinA5);
+        iziTaskDelayMs(gDelay);
+    }
+}
+
+void gauge()
+{
+	uint16_t value = 0;
+
+	iziPinSetType(eIziPinA0, eIziPinIn);
+
+	iziAdcConfigure(eIziAdcClkDiv2, eIziAdcRefAvcc);
+	iziAdcEnable();
+
+	for(;;)
+	{
+		value = iziAdcReadChannel(eIziAdcCh0);
+		IZI_ATOMIC_INSTRUCTION(gDelay = value);
+		iziTaskDelayMs(100);
+	}
+}
+
+int iziMain()
+{
+	iziTaskCreate(blink, eIziPrioLow, 96, 0);
+	iziTaskCreate(gauge, eIziPrioLow, 96, 0);
+
 	iziKernelStart();
 	return 0;
 }

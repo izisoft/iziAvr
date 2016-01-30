@@ -29,7 +29,7 @@ extern "C" {
 
 extern volatile TIziTask* gIziCurrentTask;
 extern volatile TIziTask* gIziKernelTask;
-extern volatile TIziActiveTaskList gIziActiveTaskList[IZI_PRIORITY_COUNT];
+extern volatile TIziActiveTaskList gIziActiveTaskList[IZI_TASK_PRIORITY_COUNT];
 extern volatile TIziTaskList gIziWaitingTaskList;
 extern volatile TIziTaskList gIziSuspendedTaskList;
 extern volatile TIziTaskList gIziRemovedTaskList;

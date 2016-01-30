@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 /**
- * \addtogroup iziPlatform
+ * \addtogroup driver
  * @{
  */
 

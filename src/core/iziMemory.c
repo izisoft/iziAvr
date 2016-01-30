@@ -9,7 +9,7 @@
 #define IZI_MALLOC_PATTERN		0xAE
 #define IZI_FREE_PATTERN		0xBD
 
-#ifdef IZI_MEMORY_MONITOR
+#if IZI_KERNEL_TYPE > IZI_KERNEL_TINY
 
 volatile uint16_t gIziUsedMemory = 0;
 

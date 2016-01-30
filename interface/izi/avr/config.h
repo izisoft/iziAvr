@@ -48,29 +48,22 @@ extern "C" {
 #endif
 
 //=================================================================================================
-// Kernel size
+// Kernel task stack size
 //---------------------------------------------------------------------------------------------
-#define IZI_KERNEL_SIZE_TINY     0
-#define IZI_KERNEL_SIZE_STANDARD 1
-
-#ifndef IZI_KERNEL_SIZE
-	#define IZI_KERNEL_SIZE IZI_KERNEL_SIZE_STANDARD
+#ifndef IZI_KERNEL_TASK_STACK
+	#define IZI_KERNEL_TASK_STACK (128)
 #endif
 
 //=================================================================================================
-// Definitions specifiv for different kernel size
+// Kernel size
 //---------------------------------------------------------------------------------------------
-#if IZI_KERNEL_SIZE == IZI_KERNEL_SIZE_TINY
+#define IZI_KERNEL_TINY     0
+#define IZI_KERNEL_STANDARD 1
+#define IZI_KERNEL_MEGA     2
+#define IZI_KERNEL_DEBUG    3
 
-	#define IZI_PRIORITY_MEDIUM_VALUE 0
-	#define IZI_PRIORITY_HIGH_VALUE   0
-	#undef IZI_MEMORY_MONITOR
-
-//---------------------------------------------------------------------------------------------
-#elif IZI_KERNEL_SIZE == IZI_KERNEL_SIZE_STANDARD
-	#define IZI_PRIORITY_MEDIUM_VALUE 1
-	#define IZI_PRIORITY_HIGH_VALUE   2
-	#define IZI_MEMORY_MONITOR        1
+#ifndef IZI_KERNEL_TYPE
+	#define IZI_KERNEL_TYPE IZI_KERNEL_STANDARD
 #endif
 
 #ifdef __cplusplus

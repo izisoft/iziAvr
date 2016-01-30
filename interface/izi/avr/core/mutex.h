@@ -25,10 +25,12 @@ extern "C" {
 struct SIziMutex
 {
 	int8_t _value;                      //!< Current mutex state.
-	TIziTask *_owner;                   //!< Pointer to mutex owner task.
+	TIziTask* _owner;                   //!< Pointer to mutex owner task.
 	EIziTaskPriority _ownerPriority;    //!< Original priority of mutex owner.
 	TIziTaskList _subscribers;          //!< List of tasks that has subscribed mutex.
 };
+
+#define IZI_MUTEX_INITIALIZER {1,NULL,eIziTaskPrioLow,{NULL}}
 
 /** \typedef TIziMutex
  * Type defined over mutex structure for convenience.

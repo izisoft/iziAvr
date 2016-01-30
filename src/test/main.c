@@ -3,6 +3,7 @@
 
 #include <izi/avr/core.h>
 #include <izi/avr/core/memory.h>
+#include <izi/avr/driver/adc.h>
 #include <izi/avr/driver/pin.h>
 #include <izi/avr/utils/console.h>
 
@@ -15,41 +16,40 @@ void iziKernelStartupHook()
 
 }
 
-void memory()
-{
-	iziConsolePrintf("%d\n", iziGetUsedMemory());
-}
+static uint16_t gDelay = 0;
 
-void blinkLed()
+void blink()
 {
 	iziPinSetType(eIziPinA5, eIziPinOut);
 
-	while(1)
+    for(;;)
+    {
+        iziPinToggle(eIziPinA5);
+        iziTaskDelayMs(gDelay);
+    }
+}
+
+void gauge()
+{
+	uint16_t value = 0;
+
+	iziPinSetType(eIziPinA0, eIziPinIn);
+
+	iziAdcConfigure(eIziAdcClkDiv2, eIziAdcRefAvcc);
+	iziAdcEnable();
+
+	for(;;)
 	{
-		iziPinSet(eIziPinA5, IziTrue);
-		iziTaskDelay(50);
-		iziPinSet(eIziPinA5, IziFalse);
-		iziTaskDelay(150);
-		iziPinSet(eIziPinA5, IziTrue);
-		iziTaskDelay(80);
-		iziPinSet(eIziPinA5, IziFalse);
-		iziTaskDelay(100);
-		iziPinSet(eIziPinA5, IziTrue);
-		iziTaskDelay(200);
-		iziPinSet(eIziPinA5, IziFalse);
-		iziTaskDelay(400);
-		iziPinSet(eIziPinA5, IziTrue);
-		break;
+		value = iziAdcReadChannel(eIziAdcCh0);
+		IZI_ATOMIC_INSTRUCTION(gDelay = value);
+		iziTaskDelayMs(100);
 	}
 }
 
 int iziMain()
 {
-	iziConsoleInit(115200, 256);
-	iziConsoleAttachCommand("mem", memory);
-	iziConsoleAttachCommand("ls", iziConsolePrintCmdList);
-
-	iziTaskCreate(blinkLed, eIziPrioLow, 96, 0);
+	iziTaskCreate(blink, eIziTaskPrioLow, 96, 0);
+	iziTaskCreate(gauge, eIziTaskPrioLow, 96, 0);
 
 	iziKernelStart();
 	return 0;

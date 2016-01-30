@@ -13,7 +13,7 @@ int main()
 
 	tmpVal = iziMain();
 
-#if IZI_KERNEL_SIZE > IZI_KERNEL_SIZE_STANDARD
+#if IZI_KERNEL_TYPE > IZI_KERNEL_STANDARD
 	// post mortem
 #endif
 	for(;;);

@@ -127,5 +127,5 @@ TIziTask *iziConsoleInit(uint32_t baudrate, uint16_t stackSize)
 	IZI_ASSERT(!IZI_GET_STATE(eIziConsoleInit));
 	iziUartConfigureUnit(eIziUartInterface_0,baudrate);
 	IZI_SET_STATE(eIziConsoleInit);
-	return iziTaskCreate(iziConsoleTask,eIziPrioLow,stackSize,NULL);
+	return iziTaskCreate(iziConsoleTask,eIziTaskPrioLow,stackSize,NULL);
 }
