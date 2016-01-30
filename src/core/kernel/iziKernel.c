@@ -122,7 +122,7 @@ void iziKernelYeldFromTick( void )
 	iziKernelCheckStack();
 #endif
 #if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
-	//iziKernelMonitoring();
+	iziKernelDebugYeldHook();
 #endif
 	++gIziTime;
 	iziKernelCheckWaitingTasks();
@@ -141,7 +141,7 @@ void iziKernelYeld( void )
 	iziKernelCheckStack();
 #endif
 #if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
-	//iziKernelMonitoring();
+	iziKernelDebugYeldHook();
 #endif
 	iziKernelSwitchContext();
 	IZI_RESTORE_CONTEXT();

@@ -198,6 +198,10 @@ TIziTask* iziTaskCreate(void (*taskFunction)(void), EIziTaskPriority priority,
 	task->_params = param;
 #endif
 
+#if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
+	task->_stackSize = stackSize;
+#endif
+
 	iziDeviceInitTaskStack(task, taskFunction);
 
 	if(IZI_GET_STATE(eIziKernelStarted))

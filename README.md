@@ -32,8 +32,17 @@ Type of task scheduler used. Currently two scheduler implementations are availab
 |   0    | IZI_KERNEL_SCHEDULER_HPF  | *High Priority First* |
 |   1    | IZI_KERNEL_SCHEDULER_FTS  | *Fair Time Share* |
 
-#### IZI_KERNEL_SIZE
+#### IZI_KERNEL_TYPE
 
+Type of a kernel to be compiled. It defines set of features offered by kernel. Each higher kernel type
+provides additional functionality but on the other hand requires more memory and cpu resources.
+
+| Value  | Macro                | Description |
+| :----: | -------------------- | --------------- |
+|   0    | IZI_KERNEL_TINY      | Fast kernel with small memory footprint. Suitable for smallest chips |
+|   1    | IZI_KERNEL_STANDARD  | Default kernel type, with basic functionality. Suitable for most projects |
+|   2    | IZI_KERNEL_MEGA      | Additional functionalities yet to be defined|
+|   3    | IZI_KERNEL_DEBUG     | Contains additional debug information about CPU and memory usage per task |
 
 ## Examples
 

@@ -36,6 +36,10 @@ extern volatile TIziTaskList gIziRemovedTaskList;
 extern volatile uint32_t gIziTime;
 extern volatile uint16_t gIziState;
 
+#if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
+extern void iziKernelDebugYeldHook();
+#endif
+
 #ifdef __cplusplus
 }
 #endif

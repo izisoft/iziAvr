@@ -1,9 +1,10 @@
+#include <core/kernel/iziKernelPriv.h>
 #include <core/task/iziTaskPriv.h>
 #include <device/iziDevicePriv.h>
 
 #if IZI_KERNEL_TYPE == IZI_KERNEL_DEBUG
 
-volatile uint16_t gIziKernelDebugSecond = 0;
+volatile uint16_t gIziKernelDebugCalcTime = 0;
 volatile uint32_t gIziKernelDebugYeldCount = 0;
 
 void iziKernelDebugForeachTask(void (*callback)(TIziTask*))
@@ -60,7 +61,7 @@ void iziKernelDebugYeldHook()
 {
 	iziKernelDebugForeachTask(iziKernelDebugStackUtilization);
 
-	if(gIziTime.rts.sec == gIziKernelDebugSecond)
+	if((gIziTime & 0xFFFF) !=  gIziKernelDebugCalcTime)
 	{
 		++gIziKernelDebugYeldCount;
 		++gIziCurrentTask->_yeldCount;
@@ -69,7 +70,7 @@ void iziKernelDebugYeldHook()
 	{
 		iziKernelDebugForeachTask(iziKernelDebugResetYeldCount);
 		gIziKernelDebugYeldCount = 0;
-		gIziKernelDebugSecond = gIziTime.rts.sec;
+		gIziKernelDebugCalcTime += IZI_SYSTEM_TICK_RATE;
 	}
 }
 
