@@ -7,13 +7,14 @@
 extern "C" {
 #endif
 
-/*! \addtogroup core
+/*! \addtogroup queue
  * @{
  *
  * \file queue.h
- *
+ * Implementation of iziAvr library data oriented IPC system.
+ * Queues allows to pass data streams between independent
+ * processing units (tasks and ISRs).
  */
-
 
 /*! \struct SIziQueue
  * Structure holding queue data.
@@ -114,7 +115,7 @@ IziBool_t iziQueueGetFromTask(TIziQueue *queue,void* item,IziDelay_t waitTicks);
  */
 IziBool_t iziQueueGetFromIsr(TIziQueue *queue,void* item,uint8_t *needYeld);
 
-/// @}
+//! @}
 
 #ifdef __cplusplus
 }

@@ -7,8 +7,7 @@
 extern "C" {
 #endif
 
-/**
- * \addtogroup core
+/*! \addtogroup mutex
  * @{
  *
  * \file mutex.h
@@ -19,7 +18,7 @@ extern "C" {
  * (it prevents priority inversion problem).
  */
 
-/** \struct SIziMutex
+/*! \struct SIziMutex
  * Structure holding mutex data.
  */
 struct SIziMutex
@@ -32,7 +31,7 @@ struct SIziMutex
 
 #define IZI_MUTEX_INITIALIZER {1,NULL,eIziTaskPrioLow,{NULL}}
 
-/** \typedef TIziMutex
+/*! \typedef TIziMutex
  * Type defined over mutex structure for convenience.
  */
 typedef struct SIziMutex TIziMutex;
@@ -70,7 +69,7 @@ IziBool_t iziMutexGive(TIziMutex *mutex);
  */
 IziBool_t iziMutexCheck(TIziMutex *mutex);
 
-/// @}
+//! @}
 
 #ifdef __cplusplus
 }

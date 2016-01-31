@@ -1,12 +1,18 @@
+/*! \page core iziAvr Core
+ * \ref kernel
+ *
+ * \ref task
+ *
+ * \ref mutex
+ *
+ * \ref semaphore
+ *
+ * \ref queue
+ *
+ * \ref memory
+ */
 #ifndef IZI_KERNEL_H_
 #define IZI_KERNEL_H_
-
-/*!
- *	\addtogroup core
- *	@{
- *
- *	\file kernel.h
- */
 
 #include <izi/avr/types.h>
 #include <izi/avr/config.h>
@@ -16,6 +22,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/*! \addtogroup kernel
+ * @{
+ * \file kernel.h
+ */
 
 #define IZI_DEVICE_SIGNATURE IZI_PP_CAT3(SIGNATURE_0,SIGNATURE_1,SIGNATURE_2)
 #define IZI_COMPILATION_HASH IZI_PP_UCAT5(IZI_DEVICE_SIGNATURE,IZI_CPU_FREQ,\
@@ -62,10 +73,15 @@ TIziTask* iziKernelCurrentTask();
  */
 void iziKernelStart();
 
+/*! Holds current state of the system. Each bits corresponds to
+ * one of the \ref EIziStateFlagDef flags.
+ */
+extern volatile uint16_t gIziState;
+
 #ifdef __cplusplus
 }
 #endif
 
-/// @}
+//! @}
 
 #endif /* IZI_KERNEL_H_ */

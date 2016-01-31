@@ -7,12 +7,10 @@
 extern "C" {
 #endif
 
-/*!
- *	\addtogroup core
+/*! \addtogroup semaphore
  *	@{
- */
-
-/*! \file semaphore.h
+ *
+ * \file semaphore.h
  * Simple implementation of binary semaphore functionality for iziAvr.
  */
 
@@ -85,7 +83,7 @@ IziBool_t iziSemaphoreGive(TIziSemaphore *semaphore);
  */
 IziBool_t iziSemaphoreGiveFromIsr(TIziSemaphore *semaphore,uint8_t *needYeld);
 
-/// @}
+//! @}
 
 #ifdef __cplusplus
 }
